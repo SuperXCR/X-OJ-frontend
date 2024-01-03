@@ -17,11 +17,12 @@
 }
 
 #basicLayout .header {
+  margin-bottom: 16px;
   box-shadow: #eee 1px 1px 5px;
 }
 
 #basicLayout .content {
-  background: linear-gradient(to right, #efefef, #fff);
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 20px;
   padding-left: 20px;
 }
@@ -41,6 +42,6 @@
 <script>
 import GlobalHeader from "@/components/GlobalHeader";
 export default {
-  components: { GlobalHeader }
-}
+  components: { GlobalHeader },
+};
 </script>

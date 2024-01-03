@@ -12,7 +12,7 @@
         <MdEditor :value="form.content" :handle-change="onContentChange" />
       </a-form-item>
       <a-form-item field="answer" label="答案">
-        <MdEditor :value="form.answer" :handle-change="onAnswerChange" />
+        <MdEditor :value="form.answer" :handle-change="onAnswerChange"/>
       </a-form-item>
       <a-form-item label="判题配置" :content-flex="false" :merge-props="false">
         <a-space direction="vertical" style="min-width: 480px">
@@ -105,7 +105,7 @@ const route = useRoute();
 // 如果页面地址包含 update 视为更新页面
 const updatePage = route.path.includes("update");
 
-const form = ref({
+let form = ref({
   title: "",
   tags: [],
   content: "",

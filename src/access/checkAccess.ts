@@ -20,6 +20,7 @@ const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
     if (loginUserAccess === ACCESS_ENUM.NOT_LOGIN) {
       return false;
     }
+    return true;
   }
   // 如果需要管理员权限
   if (needAccess === ACCESS_ENUM.ADMIN) {
@@ -30,16 +31,16 @@ const checkAccess = (loginUser: any, needAccess = ACCESS_ENUM.NOT_LOGIN) => {
     return true;
   }
 
-  router.beforeEach((to, from, next) => {
-    // 仅管理员可见，判断当前用户是否有权限
-    if (to.meta?.access === "canAdmin") {
-      if (store.state.user.loginUser?.role !== "admin") {
-        next("/noAuth");
-        return;
-      }
-    }
-    next();
-  });
+  // router.beforeEach((to, from, next) => {
+  //   // 仅管理员可见，判断当前用户是否有权限
+  //   if (to.meta?.access === "canAdmin") {
+  //     if (store.state.user.loginUser?.role !== "admin") {
+  //       next("/noAuth");
+  //       return;
+  //     }
+  //   }
+  //   next();
+  // });
 };
 
 export default checkAccess;

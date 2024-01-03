@@ -33,11 +33,10 @@
 
 <script setup lang="ts">
 import { routes } from "../router/routes";
-import { useRoute,useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
-import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const store = useStore();
@@ -48,13 +47,15 @@ const visibleRoutes = computed(() => {
     if (item.meta?.hideInMenu) {
       return false;
     }
-    // todo 根据权限过滤菜单
-    if (!checkAccess(store.state.user.loginUser, item?.meta?.access as string)) {
+    //  根据权限过滤菜单
+    if (
+      !checkAccess(store.state.user.loginUser, item?.meta?.access as string)
+    ) {
       return false;
     }
     return true;
-  })
-})
+  });
+});
 
 // 默认主页
 const selectedKeys = ref(["/"]);
@@ -70,14 +71,12 @@ const doMenuClick = (key: string) => {
   });
 };
 
-
 // setTimeout(() => {
 //   store.dispatch("user/getLoginUser", {
 //     userName: "管理员",
 //     userRole: ACCESS_ENUM.ADMIN,
 //   });
 // }, 3000);
-
 </script>
 
 <style scoped>
@@ -91,7 +90,7 @@ const doMenuClick = (key: string) => {
 }
 
 .title {
-  color: black;
+  color: #444;
   font-size: 22px;
   margin-left: 10px;
 }
