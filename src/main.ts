@@ -7,5 +7,6 @@ import store from "./store";
 import "@/plugins/axios";
 import "@/access/index"
 import 'bytemd/dist/index.css'
+import ArcoVueIcon from "@arco-design/web-vue/es/icon";
 
-createApp(App).use(ArcoVue).use(store).use(router).mount("#app");
+createApp(App).use(ArcoVue).use(ArcoVueIcon).use(store).use(router).mount("#app");

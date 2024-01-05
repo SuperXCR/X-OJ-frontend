@@ -71,16 +71,15 @@
 <script setup lang="ts">
 import { defineProps, onMounted, ref, withDefaults } from "vue";
 import {
-  Question,
   QuestionControllerService,
-  QuestionQueryRequest,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
+  UserControllerService,
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
 import MdViewer from "@/components/MdViewer.vue";
+import { useRouter } from "vue-router";
 
 interface Props {
   id: string;
@@ -119,18 +118,21 @@ const form = ref<QuestionSubmitAddRequest>({
  * 提交代码
  */
 const loading = ref(false);
+const router = useRouter();
 
 const doSubmit = async () => {
   // loading.value = !loading.value;
   if (!question.value?.id) {
     return;
   }
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+
+  const res = await QuestionControllerService.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
   });
   if (res.code === 0) {
     message.success("提交成功！");
+    router.push("/question_submit");
   } else {
     message.error("提交失败. " + res.message);
   }

@@ -9,14 +9,7 @@
 
 <script setup lang="ts">
 import * as monaco from "monaco-editor";
-import {
-  defineProps,
-  onMounted,
-  ref,
-  toRaw,
-  watch,
-  withDefaults,
-} from "vue";
+import { defineProps, onMounted, ref, toRaw, watch, withDefaults } from "vue";
 
 /**
  * 定义组件属性类型
@@ -47,26 +40,17 @@ const codeEditor = ref();
 //   toRaw(codeEditor.value).setValue("新的值");
 // };
 
-// watch(
-//   () => props.language,
-//   () => {
-//     // Hover on each property to see its docs!
-//     codeEditor.value = monaco.editor.create(codeEditorRef.value, {
-//       value: props.value,
-//       language: props.language,
-//       automaticLayout: true,
-//       minimap: {
-//         enabled: false,
-//       },
-//       // lineNumbers: "off",
-//       // roundedSelection: false,
-//       // scrollBeyondLastLine: false,
-//       readOnly: false,
-//       theme: "vs-dark",
-//       colorDecorators: true, // 颜色装饰器
-//     });
-//   }
-// );
+watch(
+  () => props.language,
+  () => {
+    if (codeEditor.value) {
+      monaco.editor.setModelLanguage(
+        toRaw(codeEditor.value).getModel(),
+        props.language
+      );
+    }
+  }
+);
 
 onMounted(() => {
   if (!codeEditorRef.value) {
