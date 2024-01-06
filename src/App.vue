@@ -12,14 +12,18 @@
 <script setup lang="ts">
 import BasicLayout from "@/layouts/BasicLayout.vue";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
 
 /**
  * 全局初始化函数，有全局单次调用的代码，都可以写到这里
  */
 const doInit = () => {
+  // router.push({
+  //   path: `user/login`,
+  // });
   console.log("欢迎来到我的项目");
 };
 

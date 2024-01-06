@@ -23,6 +23,7 @@
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit" style="width: 210px; margin: 20px auto">登录</a-button>
+        <a href="http://localhost:8080/user/register">没有账号？去注册</a>
       </a-form-item>
     </a-form>
   </div>

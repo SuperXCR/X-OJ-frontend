@@ -1,5 +1,5 @@
 <template>
-  <div id="viewQuestionsView">
+  <div id="viewQuestionSubmitView">
     <a-row :gutter="[24, 24]">
       <a-col :md="12" :xs="24">
         <a-tabs default-active-key="question">
@@ -73,12 +73,15 @@ import { defineProps, onMounted, ref, withDefaults } from "vue";
 import {
   QuestionControllerService,
   QuestionSubmitAddRequest,
+  QuestionSubmitQueryRequest, QuestionSubmitVO,
   QuestionVO,
+  UserControllerService
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import CodeEditor from "@/components/CodeEditor.vue";
 import MdViewer from "@/components/MdViewer.vue";
 import { useRouter } from "vue-router";
+import { languages } from "monaco-editor";
 
 interface Props {
   id: string;
@@ -88,14 +91,21 @@ const props = withDefaults(defineProps<Props>(), {
   id: () => "",
 });
 
-const question = ref<QuestionVO>();
+const question = ref<QuestionSubmitVO>();
+
+const form = ref<QuestionSubmitAddRequest>({
+  language: "java",
+  code: "",
+});
 
 const loadData = async () => {
-  const res = await QuestionControllerService.getQuestionVoByIdUsingGet(
+  const res = await QuestionControllerService.listQuestionSubmitByPageUsingPost(
     props.id as any
   );
   if (res.code === 0) {
     question.value = res.data;
+    form.value.code = res.data?.code;
+    form.value.language = res.data?.language;
   } else {
     message.error("加载失败. " + res.message);
   }
@@ -106,11 +116,6 @@ const loadData = async () => {
  */
 onMounted(() => {
   loadData();
-});
-
-const form = ref<QuestionSubmitAddRequest>({
-  language: "java",
-  code: "",
 });
 
 /**
@@ -152,7 +157,7 @@ const changeCode = (value: string) => {
 </script>
 
 <style>
-#viewQuestionsView {
+#viewQuestionSubmitView {
   max-width: 1400px;
   margin: 0 auto;
 }

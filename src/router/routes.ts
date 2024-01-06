@@ -5,6 +5,7 @@ import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
+import ViewQuestionSubmitView from "@/views/question/ViewQuestionSubmitView.vue"
 import UserLayout from "@/layouts/UserLayout.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import ViewQuestionsView from "@/views/question/ViewQuestionsView.vue";
@@ -45,6 +46,16 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/question_submit",
     name: "浏览题目提交",
     component: QuestionSubmitView,
+  },
+  {
+    path: "/view/question_submit/:id",
+    name: "查看已提交题目详情",
+    component: ViewQuestionSubmitView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
+    },
   },
   {
     path: "/view/question/:id",

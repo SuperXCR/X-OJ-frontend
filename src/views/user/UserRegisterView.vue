@@ -38,6 +38,7 @@
           style="width: 210px; margin: 20px auto"
           >注册</a-button
         >
+        <a href="http://localhost:8080/user/login">已有账号？去登陆</a>
       </a-form-item>
     </a-form>
   </div>

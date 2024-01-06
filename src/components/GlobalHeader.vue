@@ -94,7 +94,7 @@ const visibleRoutes = computed(() => {
 });
 
 // 默认主页
-const selectedKeys = ref(["/user/login"]);
+const selectedKeys = ref(["/"]);
 
 // 路由跳后，更新选中的菜单项
 router.afterEach((to, from, next) => {
